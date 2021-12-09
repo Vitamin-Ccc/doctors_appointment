@@ -1,11 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import Home from './Home';
+import Users from './Users';
+import Doctors from './Doctors';
+import { Divider } from 'semantic-ui-react';
+import Appointments from './Appointments';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Users />
+      <Divider/>
+      <Doctors />
+      <Divider/>
+      <Appointments/>
     </div>
   );
 }
