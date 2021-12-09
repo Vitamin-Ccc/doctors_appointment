@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "semantic-ui-react";
-import UserForm from "./UserForm";
+// import UserForm from "./UserForm";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
