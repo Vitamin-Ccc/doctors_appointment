@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card } from "semantic-ui-react";
+import UserForm from "../UserForm";
 // import UserForm from "./UserForm";
 
 const Users = () => {
@@ -58,6 +59,7 @@ const Users = () => {
     <div> 
       
       <h1> List of Users </h1>
+      <UserForm />
       <Card.Group>{renderUsers()}</Card.Group>
     </div>
   )

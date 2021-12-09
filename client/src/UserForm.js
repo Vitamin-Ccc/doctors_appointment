@@ -1,7 +1,7 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Select } from "semantic-ui-react";
 
-const UserForm = () => {
+const UserForm = (props) => {
 
   const [users, setUsers] = useState([]);
   const [new_first_name, setNew_first_name] = useState("");
@@ -9,11 +9,23 @@ const UserForm = () => {
   const [new_age, setNew_age] = useState("");
   const [new_gender, setNew_gender] = useState("");
 
+  const normalizeUsers = () => {
+    return props.users.map((u) => {
+      let uname = `${u.first_name} ${u.last_name}`
+      return { key: u.id, value: u.id, text: uname }
+    })
+  }
+
   return (
     <div>
       <Form>
         <Form.Field>
-          
+          <label>
+            user id: {userId}
+          </label>
+          <Select 
+            options={normalizeUsers()}
+          />
         </Form.Field>
       </Form>
     </div>
@@ -21,7 +33,7 @@ const UserForm = () => {
 
 }
 
-export default UserForm
+export default UserForm;
 
 
 
