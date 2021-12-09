@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Select } from "semantic-ui-react";
 
 const UserForm = (props) => {
-
-  const [users, setUsers] = useState([]);
+  // console.log(props)
+  // const [users, setUsers] = useState([]);
+   const [user_id, setUser_id] = useState([]);
   const [new_first_name, setNew_first_name] = useState("");
   const [new_last_name, setNew_last_name] = useState("");
   const [new_age, setNew_age] = useState("");
   const [new_gender, setNew_gender] = useState("");
 
-  const normalizeUsers = () => {
-    return props.users.map((u) => {
-      let uname = `${u.first_name} ${u.last_name}`
-      return { key: u.id, value: u.id, text: uname }
-    })
-  }
+  const normalizeUsers = (props) => {
+    console.log(props)
+    // return props.map((u) => {
+      // console.log(u)
+      // let uname = `${u.first_name} ${u.last_name}`
+      // return { key: u.id, value: u.id, text: uname }
+    // }
+    // })
+  };
+
 
   return (
     <div>
       <Form>
         <Form.Field>
           <label>
-            user id: {userId}
+            {/* user id: {user.Id} */}
           </label>
           <Select 
-            options={normalizeUsers()}
+            options={normalizeUsers(props)}
           />
         </Form.Field>
       </Form>

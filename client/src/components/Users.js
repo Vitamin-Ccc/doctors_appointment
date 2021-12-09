@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, Divider } from "semantic-ui-react";
 import UserForm from "../UserForm";
-// import UserForm from "./UserForm";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -18,7 +17,7 @@ const Users = () => {
   const getData = async () => {
     let usersRes = await axios.get("/api/users");
     setUsers(usersRes.data);
-    console.log(usersRes.data);
+    // console.log(usersRes.data);
   }
 
   const addUser = async () => {
@@ -50,16 +49,22 @@ const Users = () => {
           </Card.Content>
         </Card>
     </div>
+
       )
     })
   }
 
+  console.log(users)
 
   return (
     <div> 
       
       <h1> List of Users </h1>
-      <UserForm />
+        
+      <Divider />
+       <UserForm { ...users} />
+      <Divider />
+      
       <Card.Group>{renderUsers()}</Card.Group>
     </div>
   )
