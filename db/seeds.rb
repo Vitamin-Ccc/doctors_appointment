@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require "faker"
+require "database_cleaner"
 
 d1 = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, specialty: "Pediatrics")
 d2 = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, specialty: "Radiology")

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Card, Divider } from "semantic-ui-react";
-import UserForm from "../UserForm";
+import UserForm from "./UserForm";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -25,7 +25,14 @@ const Users = () => {
     let res = await axios.post("/api/users", newUser);
   }
 
+  const editUser = async (editedUser) => {
+    let res = await axios.put(`/api/users/${editedUser.id}`, editedUser);
+    // let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
+    setUsers([editedUser, ...users ]);
+  }
+
   const renderUsers = () => {
+    console.log(users.type)
     return users.map ((user)=> {
       return (
         <div>
@@ -54,7 +61,7 @@ const Users = () => {
     })
   }
 
-  console.log(users)
+  // console.log(users)
 
   return (
     <div> 
@@ -62,7 +69,7 @@ const Users = () => {
       <h1> List of Users </h1>
         
       <Divider />
-       <UserForm { ...users} />
+       <UserForm users={users} editUser={editUser}/>
       <Divider />
       
       <Card.Group>{renderUsers()}</Card.Group>
