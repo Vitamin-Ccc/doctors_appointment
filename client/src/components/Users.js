@@ -9,7 +9,7 @@ const Users = () => {
   const [new_last_name, setNew_last_name] = useState("");
   const [new_age, setNew_age] = useState("");
   const [new_gender, setNew_gender] = useState("");
-
+  
   useEffect(() => {
     getData();
   }, []);
@@ -17,12 +17,18 @@ const Users = () => {
   const getData = async () => {
     let usersRes = await axios.get("/api/users");
     setUsers(usersRes.data);
-    // console.log(usersRes.data);
+    // console.log(usersRes.data
   }
 
   const addUser = async () => {
     const newUser = {first_name: new_first_name, last_name: new_last_name, gender: new_gender, age: new_age}
     let res = await axios.post("/api/users", newUser);
+  }
+  
+  const deleteUser = async (user) => {
+    let res = await axios.delete(`/api/users/${user.id}`)
+    setUsers([ ...users])
+    console.log(users.type)
   }
 
   const editUser = async (editedUser) => {
@@ -32,7 +38,7 @@ const Users = () => {
   }
 
   const renderUsers = () => {
-    console.log(users.type)
+    console.log(users)
     return users.map ((user)=> {
       return (
         <div>
@@ -49,7 +55,7 @@ const Users = () => {
               <Button basic color='green'>
                 Edit
               </Button>
-              <Button basic color='red'>
+              <Button onClick={()=> deleteUser(user)} basic color='red'>
                 Delete
               </Button>
             </div>
