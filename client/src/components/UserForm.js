@@ -3,30 +3,23 @@ import { Button, Form, Select } from "semantic-ui-react";
 
 const UserForm = (props) => {
   const { editUser } = props
+  const [users, setUsers] = useState([]);
   const [user, setUser] = useState([]);
   const [user_id, setUser_id] = useState([]);
   const [first_name, setFirst_name] = useState("");
   const [last_name, setLast_name] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  
-  useEffect(() => {
-      setPlaceholder()
-  }, [user_id]);
-
-  const setPlaceholder = () => {
-    return props.users.filter((user)=>{
-      if (user_id === user.id){
-        setUser(user);
-      }
-    })
-  }
+  // const [firstNameForm, setFirstNameForm] = useState("");
+  // const [lastNameForm, setLastNameForm] = useState("");
+  // const [genderForm, setGenderForm] = useState("");
+  // const [ageForm, setAgeForm] = useState("");
 
   const normalizeUsers = () => {
     return props.users.map((u) => {
       let uname = `${u.first_name} ${u.last_name}`
       // setUser({key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age});
-      return { key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age }
+      return { key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age, first_name, last_name }
     })
   };
 
@@ -46,15 +39,14 @@ const UserForm = (props) => {
     <div>
       <Form onSubmit={handleSubmit}>
         <Form.Field>
-          user id: {user_id}
+          user id: {user.id}
           <label>
           Choose Your Name to Edit
           </label>
           <Select 
             options={normalizeUsers()}
             onChange={
-              (e, {value}) => setUser_id(value)}
-             
+              (e, {value}) => setUser(value)}
           />
         </Form.Field>
         <Form.Field>
