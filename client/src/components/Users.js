@@ -39,9 +39,9 @@ const Users = () => {
   }
 
   const editUser = async (editedUser) => {
-    let res = await axios.patch(`/api/users/${editedUser.id}`, editedUser);
-    // let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
-    setUsers([ ...users, editedUser ]);
+    let res = await axios.put(`/api/users/${editedUser.id}`, editedUser);
+    let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
+    setUsers(updatedUsers);
   }
 
   const renderUsers = () => {
