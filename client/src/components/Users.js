@@ -22,20 +22,22 @@ const Users = () => {
 
   const addUser = async () => {
     const newUser = {first_name: new_first_name, last_name: new_last_name, gender: new_gender, age: new_age}
-    let res = await axios.post("/api/users", newUser);
+    let res = await axios.put("/api/users", newUser);
   }
   
   const deleteUser = async (user) => {
     let res = await axios.delete(`/api/users/${user.id}`)
     setUsers([ ...users])
-    console.log(res)
+    // console.log(res)
   }
 
   const editUser = async (editedUser) => {
     let res = await axios.put(`/api/users/${editedUser.id}`, editedUser);
     // let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
     setUsers([editedUser, ...users ]);
+    console.log(users)
   }
+  console.log(users)
 
   const renderUsers = () => {
     console.log(users)
