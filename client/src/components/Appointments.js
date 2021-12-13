@@ -36,9 +36,9 @@ const Appointments = () => {
     }
   };
 
-  const deleteAppointment = async (appointment) => {
-    let res = await axios.delete(`/api/appointments/${appointment.id}`)
-    setAppointments([ ...appointments])
+  const deleteAppointment = async (id) => {
+    let res = await axios.delete(`/api/appointments/${id}`)
+    setAppointments(appointments.filter((a) => a.id !== id))
   };
 
   const renderAppointments = () => {
@@ -58,7 +58,7 @@ const Appointments = () => {
               <Button basic color='green'>
                 Edit
               </Button>
-              <Button onClick={()=> deleteAppointment(appointment)} basic color='red'>
+              <Button onClick={()=> deleteAppointment(appointment.id)} basic color='red'>
                 Delete
               </Button>
             </div></Table.Cell>

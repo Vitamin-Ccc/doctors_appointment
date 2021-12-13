@@ -5,6 +5,8 @@ import UserForm from "./UserForm";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [new_first_name, setNew_first_name] = useState("");
   const [new_last_name, setNew_last_name] = useState("");
   const [new_age, setNew_age] = useState("");
@@ -17,8 +19,13 @@ const Users = () => {
   const getData = async () => {
     let usersRes = await axios.get("/api/users");
     setUsers(usersRes.data);
+    let doctorsRes = await axios.get("/api/doctors");
+    setDoctors(doctorsRes.data);
+    let appointmentsRes = await axios.get("/api/appointments");
+    setAppointments(appointmentsRes.data);
+  };
     // console.log(usersRes.data
-  }
+  
 
   const addUser = async () => {
     const newUser = {first_name: new_first_name, last_name: new_last_name, gender: new_gender, age: new_age}
@@ -33,9 +40,8 @@ const Users = () => {
 
   const editUser = async (editedUser) => {
     let res = await axios.put(`/api/users/${editedUser.id}`, editedUser);
-    // let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
-    setUsers([editedUser, ...users ]);
-    console.log(users)
+    let updatedUsers = users.map((u) => (u.id === editedUser.id ? editedUser : u));
+    setUsers(updatedUsers);
   }
   console.log(users)
 
@@ -83,6 +89,6 @@ const Users = () => {
       <Card.Group>{renderUsers()}</Card.Group>
     </div>
   )
-};
+  };
 
 export default Users;
