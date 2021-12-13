@@ -32,9 +32,9 @@ const Users = () => {
     let res = await axios.post("/api/users", newUser);
   }
   
-  const deleteUser = async (user) => {
-    let res = await axios.delete(`/api/users/${user.id}`)
-    setUsers([ ...users])
+  const deleteUser = async (id) => {
+    let res = await axios.delete(`/api/users/${id}`)
+    setUsers(users.filter((u) => u.id !== id))
     console.log(res)
   }
 
@@ -62,7 +62,7 @@ const Users = () => {
               <Button basic color='green'>
                 Edit
               </Button>
-              <Button onClick={()=> deleteUser(user)} basic color='red'>
+              <Button onClick={()=> deleteUser(user.id)} basic color='red'>
                 Delete
               </Button>
             </div>
