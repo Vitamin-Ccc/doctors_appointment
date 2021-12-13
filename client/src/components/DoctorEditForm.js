@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button, Form } from "semantic-ui-react";
 
-const DoctorEditForm = () => {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+const DoctorEditForm = (props) => {
+  const [first_name, setFirstName] = useState("")
+  const [last_name, setLastName] = useState("")
   const [specialty, setSpecialty] = useState("")
   const navigate = useNavigate();
   const params = useParams();
@@ -22,12 +22,9 @@ const DoctorEditForm = () => {
   }
 
   const handleSubmit = async (e) => {
-    await axios.put(`/api/doctors/${params.id}`, {
-      firstName,
-      lastName,
-      specialty,
-    });
-    console.log(firstName)
+    let doctorData = {first_name, last_name, specialty}
+    let res = await axios.put(`/api/doctors/${params.id}`, doctorData);
+    console.log(doctorData)
     navigate(`/doctors`)
   }
 
@@ -38,7 +35,7 @@ const DoctorEditForm = () => {
       <Form.Field>
         <label>First Name</label>
         <input 
-          value = {firstName} 
+          value = {first_name} 
           onChange = {(e) => {
             setFirstName(e.target.value)
           }} />
@@ -46,7 +43,7 @@ const DoctorEditForm = () => {
       <Form.Field>
         <label>Last Name</label>
         <input 
-          value = {lastName} 
+          value = {last_name} 
           onChange = {(e) => {
             setLastName(e.target.value)
           }
