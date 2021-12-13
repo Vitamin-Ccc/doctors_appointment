@@ -5,6 +5,7 @@ import Appointments from './components/Appointments';
 import {Route, Routes} from "react-router-dom"
 import Navbar from './components/Navbar';
 import DoctorForm from './components/DoctorForm';
+import AppointmentForm from './components/Appointment Form';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path = "/doctors" element = {<Doctors />} />
         <Route path = "/doctors/:id/edit" element = {<DoctorForm />} />
         <Route path = "/appointments" element = {<Appointments />} />
+        <Route path = "/appointments/:id/edit" element = {<AppointmentForm/>}/>
       </Routes>
     </div>
   );

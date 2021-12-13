@@ -12,10 +12,11 @@ const AppointmentForm = (props) => {
   const handleSubmit = (e) => {
     // e.preventDefault();
     console.log({ doctor_id, user_id, date, description });
-    props.addAppointment({ doctor_id, user_id, description, date });
+    props.addAppointment( doctor_id, user_id, description, date );
   };
   return (
     <Form onSubmit={handleSubmit}>
+      <h1> Appointment Form </h1>
       <Form.Field>
         <label>user id</label>
         <Form.Input

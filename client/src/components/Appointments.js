@@ -36,9 +36,15 @@ const Appointments = () => {
     }
   };
 
+  const updateAppointment = async (updatedAppointment) => {
+    let res = await axios.put(`/api/appointments/${updatedAppointment.id}`, updatedAppointment);
+    let updatedAppointments = appointments.map((a) => (a.id === updatedAppointment.id ? updatedAppointment : a));
+    setAppointments(updatedAppointments);
+  };
+
   const deleteAppointment = async (id) => {
     let res = await axios.delete(`/api/appointments/${id}`)
-    setAppointments(appointments.filter((a) => a.id !== id))
+    setAppointments(appointments.filter((a) => a.id !== id));
   };
 
   const renderAppointments = () => {
@@ -55,7 +61,7 @@ const Appointments = () => {
           <Table.Cell>{appointment.description}</Table.Cell>
           <Table.Cell>            
             <div className='ui two buttons'>
-              <Button basic color='green'>
+              <Button href={`/appointments/${appointment.id}/edit`} basic color='green'>
                 Edit
               </Button>
               <Button onClick={()=> deleteAppointment(appointment.id)} basic color='red'>
@@ -86,7 +92,10 @@ const Appointments = () => {
       <Table.Body>{renderAppointments()}</Table.Body>
       </Table>
       <div>
-      <AppointmentForm addAppointment = {addAppointment} {...doctors} {...users} {...appointments} />  </div>
+      <AppointmentForm 
+      addAppointment = {addAppointment} 
+      updateAppointment = {updateAppointment} 
+      {...doctors} {...users} {...appointments} />  </div>
     </div>
   )
 };
