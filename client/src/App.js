@@ -4,6 +4,7 @@ import Doctors from './components/Doctors';
 import Appointments from './components/Appointments';
 import {Route, Routes} from "react-router-dom"
 import Navbar from './components/Navbar';
+import DoctorForm from './components/DoctorForm';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {<Users />} />
         <Route path = "/doctors" element = {<Doctors />} />
+        <Route path = "/doctors/:id/edit" element = {<DoctorForm />} />
         <Route path = "/appointments" element = {<Appointments />} />
       </Routes>
     </div>
