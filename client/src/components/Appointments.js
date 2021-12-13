@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Card, Label, Table } from "semantic-ui-react";
+import { Button, Card, Label, Table, TableRow } from "semantic-ui-react";
+import AppointmentForm from "./Appointment Form";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [users, setUsers] = useState([]);
   
   useEffect(() => {
     getData();
@@ -12,8 +15,31 @@ const Appointments = () => {
   const getData = async () => {
     let appointmentsRes = await axios.get("/api/appointments");
     setAppointments(appointmentsRes.data);
+    let doctorsRes = await axios.get("/api/doctors");
+    setDoctors(doctorsRes.data);
+    let usersRes = await axios.get("/api/users");
+    setUsers(usersRes.data);
     console.log(appointmentsRes.data);
+    console.log(doctorsRes.data);
+    console.log(usersRes.data);
   }
+
+    const addAppointment = async (appointment) => {
+    try {
+      let res = await axios.post(`/api/appointments`, appointment);
+      setAppointments([res.data,
+        ...appointments,
+      ]);
+    } catch (err) {
+      console.log(err);
+      console.log(err.response);
+    }
+  };
+
+  const deleteAppointment = async (appointment) => {
+    let res = await axios.delete(`/api/appointments/${appointment.id}`)
+    setAppointments([ ...appointments])
+  };
 
   const renderAppointments = () => {
     return appointments.map ((appointment)=> {
@@ -32,7 +58,7 @@ const Appointments = () => {
               <Button basic color='green'>
                 Edit
               </Button>
-              <Button basic color='red'>
+              <Button onClick={()=> deleteAppointment(appointment)} basic color='red'>
                 Delete
               </Button>
             </div></Table.Cell>
@@ -59,31 +85,10 @@ const Appointments = () => {
       </Table.Header>
       <Table.Body>{renderAppointments()}</Table.Body>
       </Table>
+      <div>
+      <AppointmentForm addAppointment = {addAppointment} {...doctors} {...users} {...appointments} />  </div>
     </div>
   )
 };
 
 export default Appointments;
-
-<Table celled>
-<Table.Header>
-  <Table.Row>
-    <Table.HeaderCell>Patient Name</Table.HeaderCell>
-    <Table.HeaderCell>Doctor Name</Table.HeaderCell>
-    <Table.HeaderCell>Date</Table.HeaderCell>
-    <Table.HeaderCell>Description</Table.HeaderCell>
-  </Table.Row>
-</Table.Header>
-
-<Table.Body>
-  <Table.Row>
-    <Table.Cell>
-      <Label ribbon></Label>
-    </Table.Cell>
-    <Table.Cell>Cell</Table.Cell>
-    <Table.Cell>Cell</Table.Cell>
-  </Table.Row>
-</Table.Body>
-
-
-</Table>

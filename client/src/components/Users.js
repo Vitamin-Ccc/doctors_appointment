@@ -5,10 +5,10 @@ import UserForm from "./UserForm";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const [new_first_name, setNew_first_name] = useState("");
-  const [new_last_name, setNew_last_name] = useState("");
-  const [new_age, setNew_age] = useState("");
-  const [new_gender, setNew_gender] = useState("");
+  const [first_name, setFirst_name] = useState("");
+  const [last_name, setLast_name] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
   
   useEffect(() => {
     getData();
@@ -21,7 +21,7 @@ const Users = () => {
   }
 
   const addUser = async () => {
-    const newUser = {first_name: new_first_name, last_name: new_last_name, gender: new_gender, age: new_age}
+    const newUser = {first_name: first_name, last_name: last_name, gender: gender, age: age}
     let res = await axios.post("/api/users", newUser);
   }
   
@@ -75,7 +75,7 @@ const Users = () => {
       <h1> List of Users </h1>
         
       <Divider />
-       <UserForm users={users} editUser={editUser}/>
+       <UserForm users={users} editUser={editUser} addUser = {addUser}/>
       <Divider />
       
       <Card.Group>{renderUsers()}</Card.Group>

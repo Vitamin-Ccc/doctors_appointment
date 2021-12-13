@@ -9,6 +9,11 @@ class Api::AppointmentsController < ApplicationController
     render json: @appointment
   end
 
+  def destroy
+    @appointment.destroy
+    render json: @appointment
+  end
+
   def create
     @appointment = Appointment.new(appointment_params)
     if (@appointment.save)
@@ -25,6 +30,8 @@ class Api::AppointmentsController < ApplicationController
       render json: { error: @appointment.errors }, status: 422
     end
   end
+
+
 
   private
 
