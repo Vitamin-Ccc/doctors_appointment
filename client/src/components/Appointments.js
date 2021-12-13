@@ -24,12 +24,11 @@ const Appointments = () => {
     console.log(usersRes.data);
   }
 
-    const addAppointment = async (appointment) => {
+    const addAppointment = async (newAppointment) => {
     try {
-      let res = await axios.post(`/api/appointments`, appointment);
-      setAppointments([res.data,
-        ...appointments,
-      ]);
+      // const newAppointment = {doctor_id, user_id, date, description}
+      let res = await axios.post(`/api/appointments`, newAppointment);
+      setAppointments([newAppointment, ...appointments])
     } catch (err) {
       console.log(err);
       console.log(err.response);
