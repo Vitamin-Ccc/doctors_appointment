@@ -11,7 +11,7 @@ class Api::DoctorsController < ApplicationController
   end
 
   def create
-    @doctor = Doctor.new(user_params)
+    @doctor = Doctor.new(doctor_params)
 
     if @doctor.save
       render json: @doctor
