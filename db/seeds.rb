@@ -8,6 +8,7 @@
 
 require "faker"
 require "database_cleaner"
+DatabaseCleaner.clean_with(:truncation)
 
 d1 = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, specialty: "Pediatrics")
 d2 = Doctor.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, specialty: "Radiology")

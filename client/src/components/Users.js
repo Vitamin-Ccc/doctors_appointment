@@ -27,15 +27,17 @@ const Users = () => {
     // console.log(usersRes.data
   
 
-  const addUser = async () => {
+  const addUser = async (addedUser) => {
+    console.log("addUser hit")
     const newUser = {first_name: new_first_name, last_name: new_last_name, gender: new_gender, age: new_age}
-    let res = await axios.put("/api/users", newUser);
+    let res = await axios.post("/api/users", addedUser);
+    setUsers([addedUser, ...users])
   }
   
-  const deleteUser = async (user) => {
-    let res = await axios.delete(`/api/users/${user.id}`)
-    setUsers([ ...users])
-    // console.log(res)
+  const deleteUser = async (id) => {
+    let res = await axios.delete(`/api/users/${id}`)
+    setUsers(users.filter((u) => u.id !== id))
+    console.log(res)
   }
 
   const editUser = async (editedUser) => {
@@ -63,7 +65,7 @@ const Users = () => {
               <Button basic color='green'>
                 Edit
               </Button>
-              <Button onClick={()=> deleteUser(user)} basic color='red'>
+              <Button onClick={()=> deleteUser(user.id)} basic color='red'>
                 Delete
               </Button>
             </div>
@@ -83,7 +85,7 @@ const Users = () => {
       <h1> List of Users </h1>
         
       <Divider />
-       <UserForm users={users} editUser={editUser}/>
+       <UserForm users={users} editUser={editUser} addUser={addUser}/>
       <Divider />
       
       <Card.Group>{renderUsers()}</Card.Group>

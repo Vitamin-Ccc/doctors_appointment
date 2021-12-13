@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Select } from "semantic-ui-react";
 
 const UserForm = (props) => {
-  const { editUser } = props
+  const { editUser, addUser } = props
   const [user, setUser] = useState([]);
   const [user_id, setUser_id] = useState([]);
   const [first_name, setFirst_name] = useState("");
@@ -40,25 +40,33 @@ const UserForm = (props) => {
     })
   };
 
-
   const handleSubmit = (e) => {
-    e.preventDefault();
-    return editUser({
-      first_name: first_name,
-      last_name: last_name,
-      gender: gender,
-      age: age,
-      id: user_id
-    })
+        e.preventDefault();
+        if (user.id) {
+        return editUser({
+          first_name: first_name,
+          last_name: last_name,
+          gender: gender,
+          age: age,
+          id: user_id
+       }) 
+      } else {
+        return addUser({
+          first_name: first_name,
+          last_name: last_name,
+          gender: gender,
+          age: age,
+        })
+      }
   };
 
   return (
     <div >
       <Form onSubmit={handleSubmit}>
         <Form.Field>
-          user id: {user_id}
+          {user.id ? (`User Id: ${user.id}`) : "Add User" }
           <label>
-          Choose Your Name to Edit
+            {user.id ? "Edit" : "Add a user below or select a user to Edit with the drop-down menu"}
           </label>
           <Select 
             options={normalizeUsers()}
@@ -70,7 +78,7 @@ const UserForm = (props) => {
         <Form.Field>
         <label>First Name</label>
           <Form.Input
-          placeholder={"First Name"}
+          placeholder={user.first_name ? user.first_name : "First Name"}
           onChange={(e)=>setFirst_name(e.target.value)}
           value={ first_name }
           />
@@ -78,7 +86,7 @@ const UserForm = (props) => {
         <Form.Field>
         <label>Last Name</label>
           <Form.Input
-               placeholder={"Last Name"}
+               placeholder={user.last_name ? user.last_name : "Last Name"}
                onChange={(e)=>setLast_name(e.target.value)}
                value={ last_name }
                name="last_name"
@@ -87,7 +95,7 @@ const UserForm = (props) => {
         <Form.Field>
         <label>Gender</label>
           <Form.Input
-               placeholder={"Gender"}
+               placeholder={user.gender ? user.gender : "Gender"}
                onChange={(e)=>setGender(e.target.value)}
                value={ gender }
                />
@@ -95,12 +103,12 @@ const UserForm = (props) => {
         <Form.Field>
         <label>Age</label>
           <Form.Input
-               placeholder={"Age"}
+               placeholder={user.age ? user.age : "Age"}
                onChange={(e)=>setAge(e.target.value)}
                value={ age}
                />
         </Form.Field>
-        <Button>Submit</Button>
+        <Button>{user.id ? "Edit" : "Add"}</Button>
       </Form>
     </div>
   )
