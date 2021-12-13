@@ -22,6 +22,16 @@ const UserForm = (props) => {
     })
   }
 
+  // const handleChange = (e) => {
+  //   if (e.target.first_name === "first_name") {
+  //     setFirst_name({ first_name: e.target.value });
+  //   }
+  //   if (e.target.last_name === "last_name") {
+  //     setLast_name({ last_name: e.target.value });
+  //   }
+  //   // this.setState({ [e.target.name]: e.target.value });
+  // };
+
   const normalizeUsers = () => {
     return props.users.map((u) => {
       let uname = `${u.first_name} ${u.last_name}`
@@ -43,7 +53,7 @@ const UserForm = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           user id: {user_id}
@@ -60,33 +70,34 @@ const UserForm = (props) => {
         <Form.Field>
         <label>First Name</label>
           <Form.Input
-          value={first_name}
+          placeholder={"First Name"}
           onChange={(e)=>setFirst_name(e.target.value)}
-          placeholder={ user.first_name ? user.first_name : "First Name"}
+          value={ first_name }
           />
         </Form.Field>
         <Form.Field>
         <label>Last Name</label>
           <Form.Input
-               value={last_name}
+               placeholder={"Last Name"}
                onChange={(e)=>setLast_name(e.target.value)}
-               placeholder={ user.first_name ? user.last_name : "Last Name"}
+               value={ last_name }
+               name="last_name"
                />
         </Form.Field>
         <Form.Field>
         <label>Gender</label>
           <Form.Input
-               value={gender}
+               placeholder={"Gender"}
                onChange={(e)=>setGender(e.target.value)}
-               placeholder={ user.first_name ? user.gender : "Gender"}
+               value={ gender }
                />
         </Form.Field>
         <Form.Field>
         <label>Age</label>
           <Form.Input
-               value={age}
+               placeholder={"Age"}
                onChange={(e)=>setAge(e.target.value)}
-               placeholder={ user.first_name ? user.age : "Age"}
+               value={ age}
                />
         </Form.Field>
         <Button>Submit</Button>
