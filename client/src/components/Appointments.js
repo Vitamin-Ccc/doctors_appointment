@@ -94,7 +94,7 @@ const Appointments = () => {
       <AppointmentForm 
       addAppointment = {addAppointment} 
       updateAppointment = {updateAppointment} 
-      {...doctors} {...users} {...appointments} />  </div>
+      doctors={doctors} users = {users} appoimtments={appointments} />  </div>
     </div>
   )
 };
