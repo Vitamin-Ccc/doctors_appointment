@@ -6,19 +6,25 @@ const AppointmentForm = (props) => {
   const { addAppointment} = props;
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [doctor, setDoctor] = useState("");
-  const [user, setUser] = useState("");
+  const [doctor, setDoctor] = useState({});
+  const [user, setUser] = useState({});
   const [doctor_id, setDoctor_Id] = useState("");
   const [user_id, setUser_Id] = useState("");
 
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    console.log(props.users)
     console.log({ doctor_id, user_id, date, description });
-    return addAppointment( {doctor_id: doctor_id, user_id: user_id, description: description, date: date} );
+    let u = props.users.filter((u)=> u.id == user_id);
+    setUser(u[0])
+    let d = props.doctors.filter((d)=> d.id == doctor_id)
+    setDoctor(d[0]);
+    return addAppointment( {doctor_id, user_id, description, date, user, doctor} );
     
   };
-  console.log(addAppointment());
+
+  console.log(props.users);
   return (
     <Form onSubmit={handleSubmit}>
       <h1> Appointment Form </h1>

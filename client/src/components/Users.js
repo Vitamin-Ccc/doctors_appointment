@@ -59,6 +59,9 @@ const Users = () => {
             <Card.Description>
             Age: {user.age}
             </Card.Description>
+            <Card.Description>
+            ID: {user.id}
+            </Card.Description>
           </Card.Content>
           <Card.Content extra>
             <div className='ui two buttons'>

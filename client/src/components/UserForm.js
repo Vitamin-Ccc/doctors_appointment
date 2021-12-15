@@ -16,8 +16,18 @@ const UserForm = (props) => {
 
   const setPlaceholder = () => {
     return props.users.filter((user)=>{
-      if (user_id === user.id){
+      if (user_id == user.id){
         setUser(user);
+        setFirst_name(user.first_name)
+        setLast_name(user.last_name)
+        setGender(user.gender)
+        setAge(user.age)
+      } else {
+        setUser("");
+        setFirst_name("")
+        setLast_name("")
+        setGender("");
+        setAge("");
       }
     })
   }
@@ -33,11 +43,16 @@ const UserForm = (props) => {
   // };
 
   const normalizeUsers = () => {
-    return props.users.map((u) => {
+    
+      let choices = props.users.map((u) => {
       let uname = `${u.first_name} ${u.last_name}`
+
       // setUser({key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age});
       return { key: u.id, value: u.id, text: uname, gender: u.gender, age: u.age }
     })
+
+    choices.push({key:0, value:0, text: "New User"})
+    return choices;
   };
 
   const handleSubmit = (e) => {
@@ -105,7 +120,7 @@ const UserForm = (props) => {
           <Form.Input
                placeholder={user.age ? user.age : "Age"}
                onChange={(e)=>setAge(e.target.value)}
-               value={ age}
+               value={ age }
                />
         </Form.Field>
         <Button>{user.id ? "Edit" : "Add"}</Button>

@@ -20,7 +20,7 @@ const AppointmentEditForm = (props) => {
     getData();
   }, [])
 
-  const getData = async () => {
+  const getData = async (appointment) => {
     let res = await axios.get(`/api/appointments/${props.appointment.id}`)
     setDoctor_Id(res.data.doctor_id)
     setUser_Id(res.data.user_id)

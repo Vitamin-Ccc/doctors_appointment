@@ -28,7 +28,9 @@ const Appointments = () => {
     try {
       // const newAppointment = {doctor_id, user_id, date, description}
       let res = await axios.post(`/api/appointments`, newAppointment);
-      setAppointments([newAppointment, ...appointments])
+      console.log(res);
+      let newApp = {id: res.data.id, user: newAppointment.user, doctor: newAppointment.doctor, description: newAppointment.description, date: newAppointment.date}
+      setAppointments([newApp, ...appointments])
     } catch (err) {
       console.log(err);
       console.log(err.response);
@@ -94,7 +96,7 @@ const Appointments = () => {
       <AppointmentForm 
       addAppointment = {addAppointment} 
       updateAppointment = {updateAppointment} 
-      doctors={doctors} users = {users} appoimtments={appointments} />  </div>
+      doctors={doctors} users = {users} appointments={appointments} />  </div>
     </div>
   )
 };
